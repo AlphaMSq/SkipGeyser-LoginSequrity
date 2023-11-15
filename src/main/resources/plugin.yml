@@ -1,0 +1,11 @@
+name: SkipGeyser
+version: 1.0.0
+main: io.greitan.mineserv.SkipGeyser
+description: Skip geyser players.
+author: Alpha
+website: https://mineserv.top
+api-version: '1.20'
+prefix: SkipGeyser
+
+depend: 
+- floodgate

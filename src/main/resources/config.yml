@@ -1,5 +1,4 @@
 config:
   debug: false
 
-players:
-  Alpha: "edgfjiodfghjo"
+  players:

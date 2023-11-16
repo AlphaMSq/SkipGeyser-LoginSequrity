@@ -24,9 +24,9 @@ public class PlayerJoinHandler implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Boolean isBedrock = plugin.isGeyserPlayer(player);
+        String playerPassword = plugin.getConfig().getString("config.players." + player.getName());
 
         if(isBedrock){
-            String playerPassword = plugin.getConfig().getString("config.players." + player.getName());
             if(Objects.isNull(playerPassword)){
                 String randomPassword = RandomPassword.generatePassword();
                 Bukkit.dispatchCommand(player, "register " + randomPassword);
@@ -36,6 +36,14 @@ public class PlayerJoinHandler implements Listener {
             } else {
                 Bukkit.dispatchCommand(player, "login " + playerPassword);
                 Logger.info("Used password " + playerPassword + " for player " + player.getName());
+            }
+        } else {
+            if(Objects.nonNull(playerPassword)){
+                Boolean isLinked = plugin.isLinkedAccount(player);
+                if(isLinked){
+                    Bukkit.dispatchCommand(player, "login " + playerPassword);
+                    Logger.info("Used password " + playerPassword + " for java player " + player.getName());
+                }
             }
         }
     }
